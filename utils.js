@@ -1,4 +1,3 @@
-import fs from "node:fs";
 import readline from "node:readline";
 
 class TrieNode {
@@ -58,13 +57,9 @@ export class Trie {
   }
 }
 
-export function readByLines(onLine, onClose) {
-  const fileStream = fs.createReadStream(process.argv[2]);
-  const rl = readline.createInterface({
-    input: fileStream,
-    crlfDelay: Infinity,
+export function createLinesReadStream() {
+  const stream = readline.createInterface({
+    input: process.stdin,
   });
-
-  rl.on("line", onLine);
-  rl.on("close", onClose);
+  return stream;
 }

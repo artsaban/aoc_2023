@@ -1,9 +1,9 @@
-import { readByLines } from "../utils.js";
+import { createLinesReadStream } from "../utils.js"
 
-let result = 0;
+async function solve() {
+  let result = 0;
 
-readByLines(
-  (line) => {
+  for await (const line of createLinesReadStream()) {
     if (line == "") return;
 
     let first = -1;
@@ -20,8 +20,9 @@ readByLines(
     }
 
     result += first * 10 + last;
-  },
-  () => {
-    console.log(`Part 1: ${result}`);
   }
-);
+
+  console.log(result);
+}
+
+solve();

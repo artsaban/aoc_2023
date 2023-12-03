@@ -1,4 +1,4 @@
-import { createInterface } from "node:readline";
+import { createLinesReadStream } from "../utils.js";
 
 async function solve() {
   const limits = new Map([
@@ -9,7 +9,7 @@ async function solve() {
 
   let result = 0;
 
-  outer: for await (const line of createInterface({ input: process.stdin })) {
+  outer: for await (const line of createLinesReadStream()) {
     if (line == "") continue;
     const { gameId, subsets } = getPartsFromLine(line);
 

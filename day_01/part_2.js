@@ -1,26 +1,26 @@
-import { readByLines, Trie } from "../utils.js";
+import { createLinesReadStream, Trie } from "../utils.js";
 
-let map = new Map([
-  ["one", 1],
-  ["two", 2],
-  ["three", 3],
-  ["four", 4],
-  ["five", 5],
-  ["six", 6],
-  ["seven", 7],
-  ["eight", 8],
-  ["nine", 9],
-]);
+async function solve() {
+  let map = new Map([
+    ["one", 1],
+    ["two", 2],
+    ["three", 3],
+    ["four", 4],
+    ["five", 5],
+    ["six", 6],
+    ["seven", 7],
+    ["eight", 8],
+    ["nine", 9],
+  ]);
 
-let trie = new Trie();
-let result = 0;
+  let trie = new Trie();
+  for (const number of map.keys()) {
+    trie.insert(number);
+  }
 
-for (const number of map.keys()) {
-  trie.insert(number);
-}
+  let result = 0;
 
-readByLines(
-  (line) => {
+  for await (const line of createLinesReadStream()) {
     if (line == "") return;
 
     let first = -1;
@@ -65,8 +65,9 @@ readByLines(
     }
 
     result += first * 10 + last;
-  },
-  () => {
-    console.log(`Part 2: ${result}`);
   }
-);
+
+  console.log(result);
+}
+
+solve();

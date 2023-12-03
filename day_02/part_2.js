@@ -1,9 +1,9 @@
-import { createInterface } from "node:readline";
+import { createLinesReadStream } from "../utils.js";
 
 async function solve() {
   let result = 0;
 
-  for await (const line of createInterface({ input: process.stdin })) {
+  for await (const line of createLinesReadStream()) {
     if (line == "") continue;
     const subsets = getPartsFromLine(line);
 
