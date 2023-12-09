@@ -1,4 +1,5 @@
 import readline from "node:readline";
+import fs from "node:fs";
 
 class TrieNode {
   constructor() {
@@ -62,4 +63,8 @@ export function createLinesReadStream() {
     input: process.stdin,
   });
   return stream;
+}
+
+export function readInputToMemory() {
+  return fs.readFileSync("/dev/stdin", { encoding: "utf-8" });
 }
